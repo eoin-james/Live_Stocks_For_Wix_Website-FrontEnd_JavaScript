@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--Need this for Canvas functions-->
+    <script type="text/javascript">
+        // JS Code here - Load the window to contain the graph
+        window.onload = function () {
+
+            // --------------- Data --------------
+            // Params
+            const updateInterval = 1000;
+
+            const charts = [];
+
+            // Stock Values
+            const stock1Data = [], stock2Data = [], stock3Data = [], stock4Data = [];
+
+            // --------------- Charts ---------------
+            // The chart to display each stock value
+            charts.push(new CanvasJS.Chart("chartContainer1", {
+
+                // ---------- Chart Title ----------
+                title: {
+                    text: "Chart 1"
+                },
+
+                // --------------- Chart Data ---------------
+                charts: [{
+                    data: [{
+                        type: "line",
+                        dataPoints: stock1Data
+                    }]
+                }],
+
+                // --------------- Next ---------------
+
+            }))
+            charts.push(new CanvasJS.Chart("chartContainer2", {
+
+                // ---------- Chart Title ----------
+                title: {
+                    text: "Chart 2"
+                },
+
+                // --------------- Chart Data ---------------
+                charts: [{
+                    data: [{
+                        type: "line",
+                        dataPoints: stock2Data
+                    }]
+                }],
+
+                // --------------- Next ---------------
+
+            }))
+            charts.push(new CanvasJS.Chart("chartContainer3", {
+
+                // ---------- Chart Title ----------
+                title: {
+                    text: "Chart 3"
+                },
+
+                // --------------- Chart Data ---------------
+                charts: [{
+                    data: [{
+                        type: "line",
+                        dataPoints: stock3Data
+                    }]
+                }],
+
+                // --------------- Next ---------------
+
+            }))
+            charts.push(new CanvasJS.Chart("chartContainer4", {
+
+                // ---------- Chart Title ----------
+                title: {
+                    text: "Chart 4"
+                },
+
+                // --------------- Chart Data ---------------
+                charts: [{
+                    data: [{
+                        type: "line",
+                        dataPoints: stock4Data
+                    }]
+                }],
+
+                // --------------- Next ---------------
+
+            }))
+
+            // --------------- Dynamic Chart Updates ---------------
+            updateCharts();
+
+            function updateCharts() {
+
+                for (let i = 0; i < 200; i ++) {
+                    stock1Data.push({x: i ,y: i});
+                    stock2Data.push({x: i * Math.random() ,y: i});
+                    stock3Data.push({x: i * 1.5 ,y: i});
+                    stock4Data.push({x: i * 1.2 ,y: i});
+                }
+
+                // Render all charts
+                for (let i = 0; i < charts.length; i++) {
+                    charts[i].render();
+                }
+                setTimeout(function () {updateCharts(); }, updateInterval);
+            }
+        };
+    </script>
+    <style>
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .col {
+    float: left;
+    width: 50%;
+    height: 270px;
+  }
+</style>
+    <title>Title</title>
+</head>
+<body>
+<!--Two Charts on a row-->
+<div class="row">
+  <div class="col" id="chartContainer1"></div>
+  <div class="col" id="chartContainer2"></div>
+</div>
+<!--Two more Charts on the next row-->
+<div class="row">
+  <div class="col" id="chartContainer3"></div>
+  <div class="col" id="chartContainer4"></div>
+</div>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

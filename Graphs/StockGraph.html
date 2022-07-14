@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="canvasjs.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            // Params
+            var updateInterval = 5000, j = 1
+
+            // Data
+            var dps1 = [], dps2 = [], dps3 = [], dps4 = []
+
+            // Charts Array
+            var charts = []
+
+            // Create Charts and add to Array
+            charts.push(new CanvasJS.Chart("chartContainer1", {
+                title: {
+                    text: 'Stock 1'
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps1
+                }]
+            }))
+            charts.push(new CanvasJS.Chart("chartContainer2", {
+                title: {
+                    text: 'Stock 2'
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps2
+                }]
+            }))
+            charts.push(new CanvasJS.Chart("chartContainer3", {
+                title: {
+                    text: 'Stock 3'
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps3
+                }]
+            }))
+            charts.push(new CanvasJS.Chart("chartContainer4", {
+                title: {
+                    text: 'Stock 4'
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: dps4
+                }]
+            }))
+
+            updateCharts()
+
+            function updateCharts() {
+
+                dps1.push({x: j ,y: j * Math.random()})
+                dps2.push({x: j ,y: j * Math.random()})
+                dps3.push({x: j ,y: j * Math.random()})
+                dps4.push({x: j ,y: j * Math.random()})
+
+                // Render all Charts
+                for (let i = 0; i < charts.length; i++) {
+                    charts[i].render()
+                }
+                j ++
+
+                setTimeout(function () {updateCharts(); }, updateInterval)
+            }
+
+        }
+    </script>
+        <style>
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .col {
+    float: left;
+    width: 50%;
+    height: 270px;
+  }
+</style>
+    <title></title>
+</head>
+<body>
+<div class="row">
+  <div class="col" id="chartContainer1"></div>
+  <div class="col" id="chartContainer2"></div>
+</div>
+<!--Two more Charts on the next row-->
+<div class="row">
+  <div class="col" id="chartContainer3"></div>
+  <div class="col" id="chartContainer4"></div>
+</div>
+</body>
+</html>
