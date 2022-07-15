@@ -4,8 +4,7 @@ import boto3
 import yfinance as yf
 import pandas as pd
 
-AWS_ACCESS_ID = 'AKIAXNKVXJH45FMZ4SET'
-AWS_ACCESS_KEY = '6plGLYc+/FdOlmWw+bVpaBMrRlTW4ytMCBj+RZp0'
+
 
 
 def update_data():
