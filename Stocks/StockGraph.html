@@ -2,28 +2,27 @@
 <html lang="en">
 <head>
     <script type="text/javascript" src="canvasjs.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
     <script type="text/javascript">
         window.onload = function () {
 
             // Params
-            var updateInterval = 3000, j = 1
-            var theme = "dark1" // "light1", "light2", "dark1", "dark2"
-            var back_colour = "#0C0C0D"
+            let updateInterval = 1000
+            const theme = "dark1"; // "light1", "light2", "dark1", "dark2"
+            const back_colour = "#0C0C0D";
+            const time = new Date;
 
             // Data
-            var dps1 = [], dps2 = [], dps3 = [], dps4 = []
+            const dps1 = [], dps2 = [], dps3 = [], dps4 = [];
 
             // Charts Array
-            var charts = []
+            const charts = [];
 
             // Create Charts and add to Array
             charts.push(new CanvasJS.Chart("chartContainer1", {
-
                 // Title
-                title: {
-                    text: 'Apple'
-                },
+                title: {text: 'Apple'},
 
                 // Theme
                 theme: theme,
@@ -31,19 +30,21 @@
                 // Background Colour
                 backgroundColor: back_colour,
 
+                // Axis
+                axisY: {prefix: "$"},
+
                 // Data
                 data: [{
                     type: "line",
+                    xValueType: "dateTime",
+                    valueFormatString: "hh:mm",
                     dataPoints: dps1
                 }]
 
             }))
             charts.push(new CanvasJS.Chart("chartContainer2", {
-
                 // Title
-                title: {
-                    text: 'Tesla'
-                },
+                title: {text: 'Tesla'},
 
                 // Theme
                 theme: theme,
@@ -51,9 +52,14 @@
                 // Background Colour
                 backgroundColor: back_colour,
 
+                // Axis
+                axisY: {prefix: "$"},
+
                 // Data
                 data: [{
                     type: "line",
+                    xValueType: "dateTime",
+                    valueFormatString: "hh:mm",
                     dataPoints: dps2
                 }]
 
@@ -61,9 +67,7 @@
             charts.push(new CanvasJS.Chart("chartContainer3", {
 
                 // Title
-                title: {
-                    text: 'Microsoft'
-                },
+                title: {text: 'Microsoft'},
 
                 // Theme
                 theme: theme,
@@ -71,9 +75,14 @@
                 // Background Colour
                 backgroundColor: back_colour,
 
+                // Axis
+                axisY: {prefix: "$"},
+
                 // Data
                 data: [{
                     type: "line",
+                    xValueType: "dateTime",
+                    valueFormatString: "hh:mm",
                     dataPoints: dps3
                 }]
 
@@ -81,9 +90,7 @@
             charts.push(new CanvasJS.Chart("chartContainer4", {
 
                 // Title
-                title: {
-                    text: 'Google'
-                },
+                title: {text: 'Google'},
 
                 // Theme
                 theme: theme,
@@ -91,9 +98,14 @@
                 // Background Colour
                 backgroundColor: back_colour,
 
+                // Axis
+                axisY: {prefix: "$"},
+
                 // Data
                 data: [{
                     type: "line",
+                    xValueType: "dateTime",
+                    valueFormatString: "hh:mm",
                     dataPoints: dps4
                 }]
 
@@ -102,20 +114,35 @@
             updateCharts()
 
             function updateCharts() {
+                $.getJSON("stock_data.json", updateData)
 
-                dps1.push({x: j ,y: j * Math.random()})
-                dps2.push({x: j ,y: j * Math.random()})
-                dps3.push({x: j ,y: j * Math.random()})
-                dps4.push({x: j ,y: j * Math.random()})
 
-                // Render all Charts
-                for (let i = 0; i < charts.length; i++) {
-                    charts[i].render()
-                }
-                j ++
 
-                setTimeout(function () {updateCharts(); }, updateInterval)
+                // let dps1 = []
+                // let dps2 = []
+                // let dps3 = []
+                // let dps4 = []
+
+                // setTimeout(function () {updateCharts(); }, updateInterval)
             }
+
+            function updateData (data) {
+                    for (let i = 0; i < data.length; i++) {
+                        dps1.push({x: data[i].Time, y: data[i].Apple})
+                        dps2.push({x: data[i].Time, y: data[i].Tesla})
+                        dps3.push({x: data[i].Time, y: data[i].Microsoft})
+                        dps4.push({x: data[i].Time, y: data[i].Google})
+
+                    }
+
+                    // Render all Charts
+                    for (let i = 0; i < charts.length; i++) {
+                        charts[i].render()
+                    }
+
+
+
+                }
 
         }
     </script>
