@@ -7,7 +7,8 @@
         window.onload = function () {
 
             // Params
-            var updateInterval = 5000, j = 1
+            var updateInterval = 3000, j = 1
+            var theme = "dark2" // "light1", "light2", "dark1", "dark2"
 
             // Data
             var dps1 = [], dps2 = [], dps3 = [], dps4 = []
@@ -17,40 +18,72 @@
 
             // Create Charts and add to Array
             charts.push(new CanvasJS.Chart("chartContainer1", {
+
+                // Title
                 title: {
-                    text: 'Stock 1'
+                    text: 'Apple'
                 },
+
+                // Theme
+                theme: theme,
+
+                // Data
                 data: [{
                     type: "line",
                     dataPoints: dps1
                 }]
+
             }))
             charts.push(new CanvasJS.Chart("chartContainer2", {
+
+                // Title
                 title: {
-                    text: 'Stock 2'
+                    text: 'Tesla'
                 },
+
+                // Theme
+                theme: theme,
+
+                // Data
                 data: [{
                     type: "line",
                     dataPoints: dps2
                 }]
+
             }))
             charts.push(new CanvasJS.Chart("chartContainer3", {
+
+                // Title
                 title: {
-                    text: 'Stock 3'
+                    text: 'Microsoft'
                 },
+
+                // Theme
+                theme: theme,
+
+                // Data
                 data: [{
                     type: "line",
                     dataPoints: dps3
                 }]
+
             }))
             charts.push(new CanvasJS.Chart("chartContainer4", {
+
+                // Title
                 title: {
-                    text: 'Stock 4'
+                    text: 'Google'
                 },
+
+                // Theme
+                theme: theme,
+
+                // Data
                 data: [{
                     type: "line",
                     dataPoints: dps4
                 }]
+
             }))
 
             updateCharts()
@@ -82,7 +115,7 @@
   .col {
     float: left;
     width: 50%;
-    height: 270px;
+    height: 200px;
   }
 </style>
     <title></title>
